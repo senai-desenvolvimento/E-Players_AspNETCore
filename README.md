@@ -41,7 +41,7 @@
     }
 ```
 
-> Criamos uma classe chamada EPlayersBase para abstrair alguns métodos de manipulação do CSV
+> Criamos uma superclasse chamada EPlayersBase para abstrair alguns métodos de manipulação do CSV
 ```c#
     public class EplayersBase
     {     
@@ -186,10 +186,10 @@ namespace E_Players.Models
             RewriteCSV(PATH, linhas);
         }
 
-        public void Delete(Equipe e)
+        public void Delete(int id)
         {
             List<string> linhas = ReadAllLinesCSV(PATH);
-            linhas.RemoveAll(x => x.Split(";")[0] == e.IdEquipe.ToString());
+            linhas.RemoveAll(x => x.Split(";")[0] == id.ToString());
             RewriteCSV(PATH, linhas);
         }
 ```
