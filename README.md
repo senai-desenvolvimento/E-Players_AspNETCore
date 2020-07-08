@@ -31,6 +31,16 @@
         public DateTime HorarioTermino { get; set; }
     }
 ```
+```c#
+    public class Noticias
+    {
+        public int IdNoticia { get; set; }
+        public string Titulo { get; set; }
+        public string Texto { get; set; }
+        public string Imagem { get; set; }
+    }
+```
+
 > Criamos uma classe chamada EPlayersBase para abstrair alguns métodos de manipulação do CSV
 ```c#
     public class EplayersBase
@@ -73,7 +83,7 @@ namespace E_Players.Interfaces
 ```c#
 public class Equipe : EplayersBase , IEquipe
 ```
-> Implantamos a interface e começamos o desenvolvimento do método Create:
+> Implementamos a interface e começamos o desenvolvimento do método Create:
 ```c#
 using System;
 using System.IO;
@@ -139,7 +149,7 @@ namespace E_Players.Models
 ```
 <br><br>
 
-> Dentro de EplayersBase, criamos o método que vai nos ajudar a ler todas as linhas de um csv, e o outro para re-escrevê-lo. Lembre-se de que eles poderão ser aplicados em qualquer classe que herdr de EplayersBase:
+> Dentro de EplayersBase, criamos o método que vai nos ajudar a ler todas as linhas de um csv, e o outro para re-escrevê-lo. Lembre-se de que eles poderão ser aplicados em qualquer classe que herdar de EplayersBase:
 ```c#
         public List<string> ReadAllLinesCSV(string PATH){
             
@@ -183,6 +193,7 @@ namespace E_Players.Models
             RewriteCSV(PATH, linhas);
         }
 ```
+<br><br><br>
 
 ### Parte 2 - Controllers
 
@@ -241,6 +252,8 @@ namespace E_Players.Controllers
         }
 ```
 
+<br><br>
+
 ### Parte 3 - Views
 
 > Dentro da pasta Views, criamos um diretório chamado Equipe, e dentro dele um arquivo chamado Index.cshtml <br>
@@ -252,7 +265,7 @@ namespace E_Players.Controllers
     }
 ```
 > Logo em baixo criamos um form bem simples para testar, implementando a ação via Razor:
-```c#
+```html
 
 <form method="POST" action='@Url.Action("Cadastrar")'>
     <label>ID</label>
@@ -285,13 +298,15 @@ namespace E_Players.Controllers
 </table>
 ```
 > Dentro da pasta Views/Home/Indesx.cshtml, adicionamos um link para abrir nossa página:
-```c#
+```html
 <a class="navbar-brand" asp-area="" asp-controller="Equipe" asp-action="Index">Equipes</a>
 ```
 > Rodamos e testamos nossa aplicação com:
 ```bash
 dotnet run
 ```
+
+<br><br>
 
 ### Parte 4 - Upload de Imagem
 > No método Cadastrar colocamos todo o comportamento necessário para realizar o upload de imagem:
@@ -332,7 +347,7 @@ dotnet run
         }
 ```
 > Adicionamos o ***enctype*** para permitir a inserção de arquivos e mudamos o tipo do input *Imagem* para ***file***:
-```c#
+```html
 <form method="POST" action='@Url.Action("Cadastrar")' enctype="multipart/form-data">
 
     <label>ID</label>
@@ -349,6 +364,8 @@ dotnet run
 </form>
 ```
 
+<br><br>
+
 ### Parte 5 - Excluir
 > Em EquipeController adicionamos o metodo Excluir
 ```c#
@@ -362,7 +379,7 @@ dotnet run
 
 ```
 > E na tabela do Index.cshtml adicionamos mais uma coluna com o link para excluir:
-```c#
+```html
 <table class="table table-striped table-responsive">
     <thead>
         <th>ID</th>
@@ -381,6 +398,8 @@ dotnet run
     </tbody>
 </table>
 ```
+
+<br><br>
 
 ### Parte 6 - Aplicando o design base
 > Colocamos dentro da raiz nosso diretório base do e-players<br>
@@ -631,57 +650,56 @@ campeão do lol" class="champion">
             <div class="placar">
                 <P>3 x 2</p>
             </div>
+        </div>
+        <div class="resultado">
+            <div class="team">
+                <strong>SK</strong>
+                <img src="Images/SK.png" alt="Logo da equipe SK">
+                <I>VS</I>
+                <img src="Images/FLA.png" alt="Logo da equipe do Flamengo">
+                <strong>FLA</strong>
             </div>
-            <div class="resultado">
-                <div class="team">
-                    <strong>SK</strong>
-                    <img src="Images/SK.png" alt="Logo da equipe SK">
-                    <I>VS</I>
-                    <img src="Images/FLA.png" alt="Logo da equipe do Flamengo">
-                    <strong>FLA</strong>
-                </div>
-                <div class="placar">
-                    <P>3 x 2</p>
-                </div>
-                </div>
-                <div class="resultado">
-                    <div class="team">
-                        <strong>SK</strong>
-                        <img src="Images/SK.png" alt="Logo da equipe SK">
-                        <I>VS</I>
-                        <img src="Images/FLA.png" alt="Logo da equipe do Flamengo">
-                        <strong>FLA</strong>
-                    </div>
-                </div>
-                    <div class="placar">
-                        <P>3 x 2</p>
-                    </div>
-                    <div class="resultado">
-                        <div class="team">
-                            <strong>SK</strong>
-                            <img src="Images/SK.png" alt="Logo da equipe SK">
-                            <I>VS</I>
-                            <img src="Images/FLA.png" alt="Logo da equipe do Flamengo">
-                            <strong>FLA</strong>
-                        </div>
-                    </div>
-                        <div class="placar">
-                            <P>3 x 2</p>
-                        </div>
-                        <div class="resultado">
-                            <div class="team">
-                                <strong>SK</strong>
-                                <img src="Images/SK.png" alt="Logo da equipe SK">
-                                <I>VS</I>
-                                <img src="Images/FLA.png" alt="Logo da equipe do Flamengo">
-                                <strong>FLA</strong>
-                            </div>
-                            <div class="placar">
-                                <P>3 x 2</p>
-                            </div>
-
-                        </div>
-                        <a href="todos_os_resultados.html" class="btn gradient">mais resultados</a>
+            <div class="placar">
+                <P>3 x 2</p>
+            </div>
+        </div>
+        <div class="resultado">
+            <div class="team">
+                <strong>SK</strong>
+                <img src="Images/SK.png" alt="Logo da equipe SK">
+                <I>VS</I>
+                <img src="Images/FLA.png" alt="Logo da equipe do Flamengo">
+                <strong>FLA</strong>
+            </div>
+            <div class="placar">
+                <P>3 x 2</p>
+            </div>
+        </div>
+        <div class="resultado">
+            <div class="team">
+                <strong>SK</strong>
+                <img src="Images/SK.png" alt="Logo da equipe SK">
+                <I>VS</I>
+                <img src="Images/FLA.png" alt="Logo da equipe do Flamengo">
+                <strong>FLA</strong>
+            </div>
+            <div class="placar">
+                <P>3 x 2</p>
+            </div>
+        </div>
+        <div class="resultado">
+            <div class="team">
+                <strong>SK</strong>
+                <img src="Images/SK.png" alt="Logo da equipe SK">
+                <I>VS</I>
+                <img src="Images/FLA.png" alt="Logo da equipe do Flamengo">
+                <strong>FLA</strong>
+            </div>
+            <div class="placar">
+                <P>3 x 2</p>
+            </div>
+        </div>
+        <a href="todos_os_resultados.html" class="btn gradient">mais resultados</a>
     </section>
 </div>
 
@@ -747,5 +765,3 @@ dotnet run
 
 </form>
 ```
-
-
