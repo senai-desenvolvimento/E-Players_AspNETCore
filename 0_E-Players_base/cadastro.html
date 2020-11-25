@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Players - Cadastro</title>
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/2faae0d38b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container cabecalho">
+            <div>
+                <a href="#" onclick="botaoMenu()">
+                    <i class="fas fa-bars"></i>
+                </a>
+            <a href="index.html">
+                <img src="Images/Logo.svg" alt="Logo do site E-Players">
+            </a>
+            </div>
+            <nav id="menu">
+                <ul>
+                    <li><a href="index.html" title="voltar para a página inicial">INÍCIO</a></li>
+                    <li><a href="index.html#horarios" title="Ir até a sessão de horários das partidas">HORÁRIOS</a></li>
+                    <li><a href="index.html#resultados" title="Ir até a sessão de resultados das partidas">RESULTADOS</a></li>
+                    <li><a href="index.html#noticias" title="Ir até a sessão de notícias">NOTÍCIAS</a></li>
+                    <li><a href="#" title="buscar conteudo no site"><i class="fas fa-search"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        
+        <div class="titulo_pagina">
+            <h1>cadastro de jogador</h1>
+        </div>
+        
+        <form class="cadastro" action="" method="POST">
+
+            <div class="campo">
+                <label for="nome">Nome do jogador</label>
+                <input type="text" name="nomedojogador" id="nome">
+            </div>
+
+            <div class="campo">
+                <label for="nick">Nick do jogador</label>
+                <input type="text" name="nickdojogador" id="nick">
+            </div>
+            
+            <div class="campo">
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email">
+            </div>
+
+            <div class="campo">
+                <label for="senha">Senha</label>
+                <input type="password" name="senha" id="senha">
+            </div>
+
+            <div class="campo">
+                <label for="senha_confirma">Repita a Senha</label>
+                <input type="password" name="senha" id="senha_confirma">
+            </div>
+
+            <div class="campo">
+                <label for="nascimento">Nascimento</label>
+                <input type="date" name="nascimento" id="nascimento" max="2020-03-05" min="1920-01-01">
+            </div>
+
+            <div class="campo">
+                <label for="pais">País</label>
+                <select type="pais" name="pais" id="pais">
+                    <option value="">Selecione uma opção..</option>
+                    <option value="BR">Brasil</option>
+                    <option value="US">Estados Unidos</option>
+                    <option value="ES">Espanha</option>
+                    </select>
+            </div>
+
+            <fieldset>
+                <legend>Sexo</legend>
+                
+                <input type="radio" name=   "sexo" value="M" id="Masculino">
+                <label for="Masculino">Masculino</label>
+
+                <input type="radio" name="sexo" value="F" id="Feminino">
+                <label for="Feminino">Feminino</label>
+
+                <input type="radio" name="sexo" id="Outro" value="O"> 
+                <label for="Outro">Outro</label>
+
+                <input type="radio" name="sexo" id="NA" value="N">
+                <label for="NA">Prefiro não dizer</label>
+
+            </fieldset>
+
+            <div class="campo termos">
+                <input type="checkbox" name="check" id="check">
+                <label for="check">
+                    Declaro que li e aceito todos os termos de uso deste site.
+                </label>
+            </div>
+            <button class="gradient btn" type="submit">Cadastrar</button>
+        </form>
+
+
+        <table>
+            <thead>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Foto</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>TEstestetes</td>
+                    <td><img src="/Images/download (8).png" alt=""></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </main>
+    <footer>
+        <div class="container">
+            <div>
+                <h5>INSTITUCIONAL</h5>
+                <nav>
+                    <ul>
+                        <li><a href="#">Fale Conosco</a></li>
+                        <li><a href="#">Regras</a></li>
+                        <li><a href="#">Suporte</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">Anuncie</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div>
+                <img src="Images/Logo.svg" alt="Logo do projeto E-Players">
+                <div class="sociais">
+                    <i class="fab fa-facebook-square"></i>
+                    <i class="fab fa-instagram-square"></i>
+                    <i class="fab fa-twitter-square"></i>
+                    <i class="fab fa-youtube-square"></i>
+                </div>
+            </div>
+        <div> 
+            <h5>PRINCIPAIS LIGAS</h5>
+            <h6>LIGA CBL</h6>
+            <h6>LIGA LCK</h6>
+            <h6>LIGA PROFISSIONAL</h6>
+            <h6>LIGA WCG</h6>
+        </div>
+    </div>
+        <p>© Copyrigth 2077 - Todos os direitos reservados ao sena-code</p>
+    </footer>
+    <script>
+        function botaoMenu(){
+    
+            var m = document.getElementById("menu")
+            if(m.style.display == "block"){
+                m.style.display = "none";
+            }else{
+                m.style.display = "block"
+            }
+        }
+    
+    </script>
+</body>
+
+</html>

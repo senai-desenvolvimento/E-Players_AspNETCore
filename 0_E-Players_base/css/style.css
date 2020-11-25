@@ -1,0 +1,522 @@
+:root{
+    --background: #1e1c21;
+    --pink: #fc1e8b;
+    --purple: #7278c3;
+    --blue: #00a8dc;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: var(--background);
+    font-family: 'Titillium Web','Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+}
+.gradient{
+    background: rgba(213,55,155,1);
+    background: -moz-linear-gradient(left, rgba(213,55,155,1) 0%, rgba(119,117,193,1) 69%, rgba(114,119,195,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(213,55,155,1)), color-stop(69%, rgba(119,117,193,1)), color-stop(100%, rgba(114,119,195,1)));
+    background: -webkit-linear-gradient(left, rgba(213,55,155,1) 0%, rgba(119,117,193,1) 69%, rgba(114,119,195,1) 100%);
+    background: -o-linear-gradient(left, rgba(213,55,155,1) 0%, rgba(119,117,193,1) 69%, rgba(114,119,195,1) 100%);
+    background: -ms-linear-gradient(left, rgba(213,55,155,1) 0%, rgba(119,117,193,1) 69%, rgba(114,119,195,1) 100%);
+    background: linear-gradient(to right, rgba(213,55,155,1) 0%, rgba(119,117,193,1) 69%, rgba(114,119,195,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d5379b', endColorstr='#7277c3', GradientType=1 );
+}
+.container{
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header a{
+    color: #fff;
+    text-decoration: none;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.cabecalho{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px 0px;
+    box-shadow: 0px 13px 10px rgba(0, 0, 0, 0.5);
+}
+
+.cabecalho ul{
+    display: flex;
+    justify-content: space-around;
+}
+
+.cabecalho nav{
+    width: 60%;
+}
+
+.banner{
+    width: 100%;
+    height: 400px;
+    background-image: url("../Images/meta_mundo.jpg");
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 23px;
+}
+.btn{
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.banner .btn{
+    margin-top: 230px;
+}
+
+.sobre{
+    background-image: url("../Images/Teams/T6.jpg");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 100%;
+    min-height: 350px;
+    clip-path: polygon(100% 0, 100% 91%, 0 100%, 0 10%);
+    margin: 20px 0;
+    padding: 100px 0;
+    color: white;
+}
+.sobre .container{
+    display: flex;
+    justify-content: flex-start;
+}
+
+
+.sobre .container div{
+    width: 40%;
+}
+
+.sobre h1{
+    z-index: -3;
+}
+
+.champion{
+    position: absolute;
+    right: 15%;
+    top: 450px;
+}
+
+#horarios{
+    width: 100%;
+    min-height: 120px;
+    margin: 30px 0px;
+    box-shadow: 0px 0px 22px #000000;
+    background: rgba(67,43,95,1);
+    background: -moz-linear-gradient(top, rgba(67,43,95,1) 0%, rgba(30,28,33,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(67,43,95,1)), color-stop(100%, rgba(30,28,33,1)));
+    background: -webkit-linear-gradient(top, rgba(67,43,95,1) 0%, rgba(30,28,33,1) 100%);
+    background: -o-linear-gradient(top, rgba(67,43,95,1) 0%, rgba(30,28,33,1) 100%);
+    background: -ms-linear-gradient(top, rgba(67,43,95,1) 0%, rgba(30,28,33,1) 100%);
+    background: linear-gradient(to bottom, rgba(67,43,95,1) 0%, rgba(30,28,33,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#432b5f', endColorstr='#1e1c21', GradientType=0 );
+}
+.ao_vivo, .em_breve{
+    border-left: solid 1px var(--purple);
+    color: white;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.partida img{
+    width: 40px;
+    padding: 0px 15px;
+}
+
+.partida{
+    padding: 0px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#horarios .container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+}
+
+#horarios h2{
+    margin: 0px 15px;
+}
+
+.em_breve{
+    width: 65%;
+}
+.content{
+    display: flex;
+    color: white;
+}
+.noticias{
+    width: 70%;
+    padding-right: 40px;
+    display: flex;
+    flex-flow: wrap;
+}
+.card{
+    width: 28%;
+    margin: 2%;
+    box-shadow: 0px 2px 6px #000000;
+    background: rgb(0,0,0);
+background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(30,28,33,1) 35%, rgba(30,28,33,1) 
+100%);
+}
+.card img{
+    width: 100%;
+    height: 140px;
+}
+
+.card h4{
+    padding: 1em 0 0 1em;
+}
+.card p{
+    font-size: 0.8em;
+    Padding: 1em;
+}
+.resultado{
+    margin: 2em 0;
+    text-align: center;
+}
+.resultado img{
+    width: 35px;
+}
+.recentes{
+    padding: 1.5em;
+    text-align: center;
+    box-shadow: 0px 2px 6px #000000;
+    background: rgb(0,0,0);
+background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(30,28,33,1) 35%, rgba(30,28,33,1) 
+100%);
+}
+.placar{
+    font-size: 1.5em;
+    text-shadow: 3px 3px 6px #000000;
+}
+footer{
+    box-shadow: 0px 0px 10px black;
+    color: white;
+    margin-top: 30px;
+    background: rgb(0,0,0);
+}
+footer a{
+    color: white;
+    text-decoration: none;
+}
+footer ul{
+    list-style-type: none;
+}
+footer .sociais{
+    display: flex;
+    justify-content: space-evenly;
+    color: var(--purple);
+    font-size: 2em;
+    padding: 1.2em 0px;
+}
+footer .container{
+    display: flex;
+    justify-content: space-between;
+    padding: 2em;
+}
+footer h5{
+    padding-bottom: 1.2em;
+    color: #474747;
+    font-size: 1.7em;
+}
+footer h6{
+    text-align: end;
+    font-size: 1em;
+}
+footer p{
+    text-align: center;
+    color: #474747;
+}
+
+
+/* Página de Cadastro */
+
+.titulo_pagina{
+    text-transform: uppercase;
+    background-image: url("../Images/cadastro.png");
+    width: 100%;
+    height: 400px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: white;
+    display: flex;
+    justify-content: center;
+    padding-top: 5em;
+}
+.cadastro{
+    margin: auto;
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-transform: uppercase;
+    box-shadow: 0px 2px 6px #000000, 0px -6px 15px rgba(114, 119, 195, 1);
+    padding: 1.5em;
+    margin-bottom: 3em;
+}
+.campo{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    color: white;
+    margin-bottom: 0.5em;
+}
+fieldset{
+    color: white;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select{
+    border: none;
+    background-color: #1e1c21;
+    color: #ccc;
+    border-bottom: 1px solid #474747;
+    width: 60%;
+    padding: 0.5em;
+}
+input:focus, select:focus{
+    outline: none;
+    background-color: #474747;
+    box-shadow: 0px 0px 5px #474747;
+    border-bottom: 1px solid var(--purple)
+}
+input[type="date"]{
+    text-align: center;
+    font-size: 1.3em;
+}
+.cadastro button{
+    border: none;
+    margin: 40px;
+    width: 60%;
+    cursor: pointer;
+}
+fieldset{
+    border: none;
+    padding: 1em;
+    width: 100%;
+}
+fieldset label{
+    text-transform: none;
+    margin-right: 0.2em;
+}
+.termos{
+    align-items: center;
+    justify-content: start;
+    padding: 1em;
+}
+.termos label{
+    text-transform: none;
+    margin-left: 0.5em;
+    
+}
+.cabecalho .fa-bars{
+    color: var(--purple);
+    font-size: 2em;
+     /* margin-left: 2em;   */
+    /* padding: 0.5em; */ 
+    display: none;
+
+}
+
+table{
+    color: white;
+    width: 50%;
+    margin: 0 auto;
+}
+
+table td, table th{
+    border: solid 1px #7377C2;
+    padding: 5px;
+    text-align: center;
+}
+
+table img{
+    max-width: 50px;
+}
+
+@media screen and (max-width: 1200px){
+    .champion{        
+        right: 3%;
+        width: 50%;
+    }
+    .sobre .container div{
+        width: 47%;
+    }
+    .container{
+        width: 95%;
+    }
+    #horarios .container {
+        flex-direction: column;
+    }
+    .em_breve, .ao_vivo{
+        border: none;
+    }
+
+}/*Fim media mas 1200px  */
+
+@media screen and (max-width: 768px){
+    header img{
+        max-width: 180px;
+    }
+    .container{
+        width: 98%;
+    }
+    .champion{
+        right: -12%;
+        top: 580px;
+        width: 450px;
+    }
+    .sobre .container div{
+        width: 55%;
+        margin-left: 28px;
+
+    }
+    .ao_vivo{
+        padding: 5.3em 5px;
+        width: 50%;
+        flex-wrap: wrap;
+    }
+    .em_breve{
+        width: 50%;
+        flex-wrap: wrap;
+
+    }
+    .em_breve, .partida{
+        margin: 0.5em 0;
+    }
+/* Seção noticias */
+    .noticias{
+        flex-direction: column;
+    }
+    .card{
+        display: flex;
+        width: 100%;
+    }
+    .card img{
+        width: 30%;
+    }
+    footer .container{
+        width: 90%;
+        margin: 0 auto;
+        padding: 0;
+    }
+    .mob_logo_sociais{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .mob_logo_sociais img{
+        max-width: 200px;
+    }
+} /* Fim media mas 768px */
+
+@media screen and (max-width: 460px){
+    .cabecalho .fa-bars{
+        display: block;
+    }
+    /* Champion ocultado no mobile */
+    .champion{
+        display: none;
+        right: -12%;
+        top: 580px;
+        width: 450px;
+    }
+    #menu{
+        position: absolute; 
+        top: 72px;
+        background-color: #1e1c21;
+        width: 100%;
+        display: none;
+    }
+    .cabecalho div{
+       display: flex;
+       justify-content: space-between;
+       width: 100%;
+       align-items: center;
+       padding: 0 2em;
+    }
+    .cabecalho ul a{
+        padding: 0.5em 60% 1em 2.5em;
+        margin: 0.1em 0;
+        
+    }
+    .cabecalho ul{
+        flex-direction: column;
+        height: 250px;
+    }
+    .sobre .container div{
+        width: 85%;
+    }
+    .sobre h1{
+        text-align: center;
+        margin-bottom: 1em;
+    }
+    .sobre p{
+        text-align: justify;
+    }
+    #horarios .container{
+        flex-direction: column;
+    }
+    .ao_vivo, .em_breve{
+        padding: 1em;
+        border: none;
+        
+    }
+    
+    .partida{
+        margin: 1em 0;
+    }
+   .card{
+       flex-direction: column;
+       
+   }
+   .card img{
+       width: 100%;
+       object-fit:cover ;
+       object-position: top;
+   }
+   .noticias{
+       padding-right: 15px;
+       width: 95%;
+       
+   }
+   .recentes{
+       padding: 0.5em;
+   }
+   .content{
+       flex-direction: column;
+   }
+   footer .container{
+       flex-direction: column;
+   }
+   footer h6{
+    text-align: start;
+   }
+   .mob_logo_sociais{
+       padding: 15px;
+   }
+   
+  
+} /* Fim media mas 460px*\
