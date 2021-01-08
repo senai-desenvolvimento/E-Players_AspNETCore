@@ -197,7 +197,7 @@ namespace E_Players.Models
 
 ### Parte 2 - Controllers
 
-> Criamos a classe ***EquipeController***
+> Criamos a classe ***EquipeController***, com a rota geral "Equipe" para toda a classe
 ```c#
 using System;
 using System.Collections.Generic;
@@ -209,6 +209,7 @@ using E_Players.Models;
 
 namespace E_Players.Controllers
 {
+    [Route("Equipe")]
     public class EquipeController : Controller
     {
         public IActionResult Index()
@@ -309,8 +310,9 @@ dotnet run
 <br><br>
 
 ### Parte 4 - Upload de Imagem
-> No método Cadastrar colocamos todo o comportamento necessário para realizar o upload de imagem:
+> No método Cadastrar colocamos todo o comportamento necessário para realizar o upload de imagem, com a rota diferente da padrão:
 ```c#
+        [Route("Cadastrar")]
         public IActionResult Cadastrar(IFormCollection form)
         {
             Equipe novaEquipe   = new Equipe();
