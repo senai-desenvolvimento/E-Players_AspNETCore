@@ -2,7 +2,7 @@
 ## Projeto de aprendizagem MVC com ASP Net Core
 
 ### Parte 1 - Models
-> Criamos nossos models Equipe, Jogador e Partida com suas devidas propriedades
+> Criamos nossos models Equipe, Jogador, Partida e Notícias com suas devidas propriedades
 ```c#
     public class Equipe
     {
@@ -369,7 +369,7 @@ dotnet run
 ### Parte 5 - Excluir
 > Em EquipeController adicionamos o metodo Excluir
 ```c#
-        [Route("{id}")]
+        [Route("Equipe/{id}")]
         public IActionResult Excluir(int id)
         {
             equipeModel.Delete(id);
