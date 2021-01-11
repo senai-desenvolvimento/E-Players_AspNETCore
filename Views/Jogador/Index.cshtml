@@ -1,0 +1,55 @@
+@model Jogador
+@{
+    ViewData["Title"] = "Jogadores";
+}
+
+<div class="titulo_pagina">
+    <h1>cadastro de @ViewData["Title"]</h1>
+</div>
+
+<form method="POST" action='@Url.Action("Cadastrar")' class="cadastro">
+
+    <div class="campo">
+        <label>ID</label>
+        <input type="text" name="IdJogador" />
+    </div>
+
+    <div class="campo">
+        <label>ID</label>
+        <input type="text" name="IdEquipe" />
+    </div>
+
+    <div class="campo">
+        <label>Nome</label>
+        <input type="text" name="Nome" />
+    </div>
+
+    <div class="campo">
+        <label>Email</label>
+        <input type="text" name="Email" />
+    </div>
+
+    <div class="campo">
+        <label>Senha</label>
+        <input type="password" name="Senha" />
+    </div>
+
+    <button class="gradient btn" type="submit">Cadastrar</button>
+</form>
+
+<table class="table table-striped table-responsive">
+    <thead>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+    </thead>
+    <tbody>
+        @foreach(Jogador j in ViewBag.Jogadores){
+            <tr>
+                <td>@j.IdJogador</td>
+                <td>@j.Nome</td>
+                <td>@j.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -767,3 +767,260 @@ dotnet run
 
 </form>
 ```
+
+### Parte 7 - Login - Parte 1
+
+> Colocamos os atributos de email e senha em Jogador
+```c#
+namespace E_Players_AspNETCore.Models
+{
+    public class Jogador
+    {
+        public int IdJogador { get; set; }
+        public string Nome { get; set; }
+        public int IdEquipe { get; set; }
+        // Login
+        public string Email { get; set; }
+        public string Senha { get; set; }
+
+    }
+}
+```
+
+> Herdamos EplayersBase em jogador
+```c#
+    public class Jogador : EPlayersBase
+```
+
+> Criamos o método construtor para gerar o arquivo
+```c#
+    private const string PATH = "Database/Jogador.csv";
+
+    public Jogador()
+    {
+        CreateFolderAndFile(PATH);
+    }
+```
+
+
+> Criamos a interface para Jogador -> *IJogador*
+```c#
+using System.Collections.Generic;
+using E_Players_AspNETCore.Models;
+
+namespace E_Players_AspNETCore.Interfaces
+{
+    public interface IJogador
+    {
+        //Criar
+        void Create(Jogador j);
+        //Ler
+        List<Jogador> ReadAll();
+        //Alterar
+        void Update(Jogador j);
+        //Excluir
+        void Delete(int id);  
+    }
+}
+```
+
+> Implementamos a Interface
+```c#
+public class Jogador : EPlayersBase , IJogador
+```
+
+> Implementamos os métodos de CRUD no model
+```c#
+        /// <summary>
+        /// Adiciona uma Jogador ao CSV
+        /// </summary>
+        /// <param name="j">Jogador</param>
+        public void Create(Jogador j)
+        {
+            string[] linha = { PrepararLinha(j) };
+            File.AppendAllLines(PATH, linha);
+        }
+
+        /// <summary>
+        /// Prepara a linha para a estrutura do objeto Jogador
+        /// </summary>
+        /// <param name="e">Objeto "Jogador"</param>
+        /// <returns>Retorna a linha em formato de .csv</returns>
+        private string PrepararLinha(Jogador j)
+        {
+            return $"{j.IdJogador};{j.Nome};{j.Email};{j.Senha}";
+        }
+
+        /// <summary>
+        /// Exclui uma Jogador
+        /// </summary>
+        /// <param name="idJogador"></param>
+        public void Delete(int idJogador)
+        {
+            List<string> linhas = ReadAllLinesCSV(PATH);
+            // 1;FLA;fla.png
+            linhas.RemoveAll(x => x.Split(";")[0] == idJogador.ToString());                        
+            RewriteCSV(PATH, linhas);
+        }
+
+        /// <summary>
+        /// Lê todos as linhas do csv
+        /// </summary>
+        /// <returns>Lista de Jogadors</returns>
+        public List<Jogador> ReadAll()
+        {
+            List<Jogador> jogadores = new List<Jogador>();
+            string[] linhas = File.ReadAllLines(PATH);
+
+            foreach (var item in linhas)
+            {
+                string[] linha = item.Split(";");
+
+                Jogador jogador = new Jogador();
+                jogador.IdJogador = int.Parse(linha[0]);
+                jogador.Nome = linha[1];
+                jogador.Email = linha[2];
+                jogador.Senha = linha[3];
+
+                jogadores.Add(jogador);
+            }
+            return jogadores;
+        }
+
+        /// <summary>
+        /// Altera uma Jogador
+        /// </summary>
+        /// <param name="j">Jogador alterada</param>
+        public void Update(Jogador j)
+        {
+            List<string> linhas = ReadAllLinesCSV(PATH);
+            linhas.RemoveAll(x => x.Split(";")[0] == j.IdJogador.ToString());
+            linhas.Add( PrepararLinha(j) );                        
+            RewriteCSV(PATH, linhas); 
+        }
+```
+
+> Criamos o controller *JogadorController.cs*, com o método de retorno pra view da index:
+```c#
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+
+namespace E_Players_AspNETCore.Controllers
+{
+    [Route("Jogador")]
+    public class JogadorController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+    }
+}
+```
+
+> Instanciamos Jogador dentro da classe e chamamos uma ViewBag como apoio e retorno para listar os jogadores disponíveis:
+```c#
+        Jogador jogadorModel = new Jogador();
+
+        public IActionResult Index()
+        {
+            ViewBag.Jogadores = jogadorModel.ReadAll();
+            return View();
+        }
+```
+>Criamos o método Cadastrar(), passando como argumento um IFormCollection:
+```c#
+        public IActionResult Cadastrar(IFormCollection form)
+        {
+            Jogador novoJogador     = new Jogador();
+            novoJogador.IdJogador   = Int32.Parse(form["IdJogador"]);
+            novoJogador.Nome        = form["Nome"];
+            novoJogador.Email       = form["Email"];
+            novoJogador.Senha       = form["Senha"];
+
+            jogadorModel.Create(novoJogador);            
+            ViewBag.Jogadores = jogadorModel.ReadAll();
+
+            return LocalRedirect("~/Jogador");
+        }
+```
+
+> Dentro da pasta Views, criamos um diretório chamado Jogador, e dentro dele um arquivo chamado Index.cshtml
+Dentro deste arquivo chamamos nossa model e mudamos a ViewData do Title:
+```c#
+    @model Jogador
+    @{
+        ViewData["Title"] = "Jogadores";
+    }
+```
+
+> Logo em baixo criamos um form bem simples para testar, implementando a ação via Razor:
+```html
+
+@model Equipe
+@{
+    ViewData["Title"] = "Equipes";
+}
+
+<div class="titulo_pagina">
+    <h1>cadastro de @ViewData["Title"]</h1>
+</div>
+
+<form class="cadastro" action="@Url.Action("Cadastrar")" method="post" enctype="multipart/form-data" >
+    
+    <div class="campo">
+        <label for="IdEquipe">IdEquipe</label>
+        <input type="text" name="IdEquipe" id="IdEquipe">
+    </div>    
+
+    <div class="campo">
+        <label for="Nome">Nome</label>
+        <input type="text" name="Nome" id="Nome">
+    </div>
+
+    <div class="campo">
+        <label for="Imagem">Imagem</label>
+        <input type="file" name="Imagem" id="Imagem">
+    </div>
+
+    <button class="gradient btn" type="submit">Cadastrar</button>
+</form>
+
+
+<table class="table table-responsive table-striped">
+    <thead>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>Imagem</th>
+        <th>Ações</th>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.Equipes)
+        {
+            <tr>
+                <td>@item.IdEquipe</td>
+                <td>@item.Nome</td>
+                <td>
+                    <img src="img/Equipes/@item.Imagem" alt="Imagem da equipe @item.Nome" />
+                </td>
+                <td>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Equipe" asp-action="Excluir" asp-route-id="@item.IdEquipe">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+```
+
+> Dentro da pasta Views/Home/Indesx.cshtml, adicionamos um link para abrir nossa página:
+```html
+<a class="navbar-brand" asp-area="" asp-controller="Jogador" asp-action="Index">Jogadores</a>
+```
+
+### Parte 7 - Login - Parte 2

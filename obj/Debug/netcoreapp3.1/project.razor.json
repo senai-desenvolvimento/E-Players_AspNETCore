@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Users\\Paulo Brandão\\Documents\\SENAI\\2020_1Sem\\E-Players\\E-Players_AspNETCore\\E-Players_AspNETCore.csproj",
+  "FilePath": "c:\\Users\\Paulo Brandão\\Desktop\\E-Players_AspNETCore\\E-Players_AspNETCore.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -14392,33 +14392,38 @@
   "RootNamespace": "E_Players_AspNETCore",
   "Documents": [
     {
-      "FilePath": "c:\\Users\\Paulo Brandão\\Documents\\SENAI\\2020_1Sem\\E-Players\\E-Players_AspNETCore\\Views\\_ViewImports.cshtml",
+      "FilePath": "c:\\Users\\Paulo Brandão\\Desktop\\E-Players_AspNETCore\\Views\\_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\Paulo Brandão\\Documents\\SENAI\\2020_1Sem\\E-Players\\E-Players_AspNETCore\\Views\\Shared\\_Layout.cshtml",
-      "TargetPath": "Views\\Shared\\_Layout.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\Paulo Brandão\\Documents\\SENAI\\2020_1Sem\\E-Players\\E-Players_AspNETCore\\Views\\Equipe\\Index.cshtml",
-      "TargetPath": "Views\\Equipe\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\Paulo Brandão\\Documents\\SENAI\\2020_1Sem\\E-Players\\E-Players_AspNETCore\\Views\\Home\\Index.cshtml",
-      "TargetPath": "Views\\Home\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\Users\\Paulo Brandão\\Documents\\SENAI\\2020_1Sem\\E-Players\\E-Players_AspNETCore\\Views\\_ViewStart.cshtml",
+      "FilePath": "c:\\Users\\Paulo Brandão\\Desktop\\E-Players_AspNETCore\\Views\\_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\Paulo Brandão\\Documents\\SENAI\\2020_1Sem\\E-Players\\E-Players_AspNETCore\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+      "FilePath": "c:\\Users\\Paulo Brandão\\Desktop\\E-Players_AspNETCore\\Views\\Jogador\\index.cshtml",
+      "TargetPath": "Views\\Jogador\\index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\Paulo Brandão\\Desktop\\E-Players_AspNETCore\\Views\\Home\\Index.cshtml",
+      "TargetPath": "Views\\Home\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\Paulo Brandão\\Desktop\\E-Players_AspNETCore\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\Paulo Brandão\\Desktop\\E-Players_AspNETCore\\Views\\Shared\\_Layout.cshtml",
+      "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\Paulo Brandão\\Desktop\\E-Players_AspNETCore\\Views\\Equipe\\Index.cshtml",
+      "TargetPath": "Views\\Equipe\\Index.cshtml",
       "FileKind": "mvc"
     }
   ],
