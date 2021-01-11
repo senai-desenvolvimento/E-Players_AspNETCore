@@ -960,58 +960,57 @@ Dentro deste arquivo chamamos nossa model e mudamos a ViewData do Title:
 
 > Logo em baixo criamos um form bem simples para testar, implementando a ação via Razor:
 ```html
-
-@model Equipe
+@model Jogador
 @{
-    ViewData["Title"] = "Equipes";
+    ViewData["Title"] = "Jogadores";
 }
 
 <div class="titulo_pagina">
     <h1>cadastro de @ViewData["Title"]</h1>
 </div>
 
-<form class="cadastro" action="@Url.Action("Cadastrar")" method="post" enctype="multipart/form-data" >
-    
-    <div class="campo">
-        <label for="IdEquipe">IdEquipe</label>
-        <input type="text" name="IdEquipe" id="IdEquipe">
-    </div>    
+<form method="POST" action='@Url.Action("Cadastrar")' class="cadastro">
 
     <div class="campo">
-        <label for="Nome">Nome</label>
-        <input type="text" name="Nome" id="Nome">
+        <label>ID Jogador</label>
+        <input type="text" name="IdJogador" />
     </div>
 
     <div class="campo">
-        <label for="Imagem">Imagem</label>
-        <input type="file" name="Imagem" id="Imagem">
+        <label>ID Equipe</label>
+        <input type="text" name="IdEquipe" />
+    </div>
+
+    <div class="campo">
+        <label>Nome</label>
+        <input type="text" name="Nome" />
+    </div>
+
+    <div class="campo">
+        <label>Email</label>
+        <input type="text" name="Email" />
+    </div>
+
+    <div class="campo">
+        <label>Senha</label>
+        <input type="password" name="Senha" />
     </div>
 
     <button class="gradient btn" type="submit">Cadastrar</button>
 </form>
 
-
-<table class="table table-responsive table-striped">
+<table class="table table-striped table-responsive">
     <thead>
-        <th>Id</th>
+        <th>ID</th>
         <th>Nome</th>
-        <th>Imagem</th>
-        <th>Ações</th>
+        <th>Email</th>
     </thead>
     <tbody>
-        @foreach (var item in ViewBag.Equipes)
-        {
+        @foreach(Jogador j in ViewBag.Jogadores){
             <tr>
-                <td>@item.IdEquipe</td>
-                <td>@item.Nome</td>
-                <td>
-                    <img src="img/Equipes/@item.Imagem" alt="Imagem da equipe @item.Nome" />
-                </td>
-                <td>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Equipe" asp-action="Excluir" asp-route-id="@item.IdEquipe">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                </td>
+                <td>@j.IdJogador</td>
+                <td>@j.Nome</td>
+                <td>@j.Email</td>
             </tr>
         }
     </tbody>
