@@ -1023,3 +1023,181 @@ Dentro deste arquivo chamamos nossa model e mudamos a ViewData do Title:
 ```
 
 ### Parte 7 - Login - Parte 2
+
+> Na pasta ***Views*** criamos uma nova pasta chamada ***Login*** e dentro de login colocamos um arquivo *Index.cshtml*
+
+```html
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="titulo_pagina">
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+<form method="POST" action='@Url.Action("Logar")' class="cadastro">
+
+    <div class="campo">
+        <label>Email</label>
+        <input type="text" name="Email" required />
+    </div>
+
+    <div class="campo">
+        <label>Senha</label>
+        <input type="password" name="Senha" required />
+    </div>
+
+    <button class="gradient btn" type="submit">Entrar</button>
+</form>
+```
+
+> Também criamos dentro da pasta Controllers a classe ***LoginController.cs*** , fazemos ela herdar de *Controller*, deixamos a Route no topo da classe como Login, e chamamos um model de Jogador para acessar as propriedades *Email* e *Senha*
+
+```c#
+using E_Players_AspNETCore.Models;
+using Microsoft.AspNetCore.Mvc;
+
+namespace E_Players_AspNETCore.Controllers
+{
+    [Route("Login")]
+    public class LoginController : Controller
+    {
+        Jogador jogadorModel = new Jogador();
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+    }
+}
+```
+
+> Dentro do menu principal colocamos um link para a tela de login:
+```html
+<li><a asp-controller="Login" asp-action="Index" title="voltar para a página inicial">LOGIN</a></li>
+```
+
+> Criamos o método para Logar e testamos se está redirecionando para a Home ao enviar o formulário:
+```c#
+        [Route("Logar")]
+        public IActionResult Logar(IFormCollection form)
+        {
+            return LocalRedirect("~/");
+        }
+```
+
+> Criamos no CSS uma classe para os erros:
+```css
+.erro{
+    color: #fc1e8b;
+}
+```
+
+> Dentro da classe login, utilizamos o recurso TempData para armazenar as mensagens de erro na aplicação:
+```c#
+[TempData]
+public string Mensagem { get; set; }
+```
+
+> Criamos o método Logar utilizando todos os parâmetros necessários
+```c#
+public IActionResult Logar(IFormCollection form)
+{
+    // Lemos todos os arquivos do CSV
+    List<string> csv = jogadorModel.ReadAllLinesCSV("Database/Jogador.csv");
+
+    // Verificamos se as informações passadas existe na lista de string
+    var logado = 
+    csv.Find(
+        x => 
+        x.Split(";")[2] == form["Email"] && 
+        x.Split(";")[3] == form["Senha"]
+    );
+
+
+    // Redirecionamos o usuário logado caso encontrado
+    if(logado != null)
+    {
+        return LocalRedirect("~/");
+    }
+
+    Mensagem = "Dados incorretos, tente novamente...";
+    return LocalRedirect("~/Login");
+}
+```
+
+> Dentro da div de erro chamamos nossa TempData
+```html
+<div class="erro">@TempData.Peek("Mensagem")</div>
+```
+
+> Vamos salvar os dados na sessão do navegador utilizando a documentação da microsoft: [https://docs.microsoft.com/pt-br/aspnet/core/fundamentals/app-state?view=aspnetcore-5.0](https://docs.microsoft.com/pt-br/aspnet/core/fundamentals/app-state?view=aspnetcore-5.0)
+
+> Em Startup.cs, no método de serviços adicionamos:
+```c#
+    services.AddDistributedMemoryCache();
+
+    services.AddSession(options =>
+    {
+        options.IdleTimeout = TimeSpan.FromHours(2);
+        options.Cookie.HttpOnly = true;
+        options.Cookie.IsEssential = true;
+    });
+```
+
+> No método *Configure* adicione o seguinte método, em cima de *app.UseEndpoints*:
+```c#
+app.UseSession();
+```
+
+
+
+> Dentro de *logado* , antes de retornar o login com sucesso, salvamos os dados do usuário em uma Sessão:
+```c#
+if(logado != null)
+{
+    // Definimos os valores a serem salvos na sessão
+    HttpContext.Session.SetString("_UserName", logado.Split(";")[1]);
+
+    return LocalRedirect("~/");
+}
+```
+
+> Na Index da HomeController, colocamos uma ViewBag, pegando as informações da sessão:
+```c#
+ViewBag.UserName = HttpContext.Session.GetString("_UserName"); 
+```
+
+> No menu principal no **_Layout.cshtml**, incrementamos a seguinte condicional:
+```html
+@if(ViewBag.UserName != null)
+{
+    <li style="color: #d5379b">Olá @ViewBag.UserName!</li>
+    <li><a asp-controller="Login" asp-action="Logout" title="voltar para a página inicial">SAIR</a></li>
+}else{
+
+    <li><a asp-controller="Login" asp-action="Index" title="voltar para a página inicial">LOGIN</a></li>
+}
+```
+
+> Fazemos o método de Logout:
+```c#
+[Route("Logout")]
+public IActionResult Logout()
+{
+    HttpContext.Session.Remove("_UserName");
+    return LocalRedirect("~/");
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+

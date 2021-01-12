@@ -14392,6 +14392,11 @@
   "RootNamespace": "E_Players_AspNETCore",
   "Documents": [
     {
+      "FilePath": "c:\\Users\\Paulo Brandão\\Desktop\\E-Players_AspNETCore\\Views\\Login\\Index.cshtml",
+      "TargetPath": "Views\\Login\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\Paulo Brandão\\Desktop\\E-Players_AspNETCore\\Views\\_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
       "FileKind": "mvc"
@@ -14402,8 +14407,8 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\Users\\Paulo Brandão\\Desktop\\E-Players_AspNETCore\\Views\\Jogador\\index.cshtml",
-      "TargetPath": "Views\\Jogador\\index.cshtml",
+      "FilePath": "c:\\Users\\Paulo Brandão\\Desktop\\E-Players_AspNETCore\\Views\\Jogador\\Index.cshtml",
+      "TargetPath": "Views\\Jogador\\Index.cshtml",
       "FileKind": "mvc"
     },
     {

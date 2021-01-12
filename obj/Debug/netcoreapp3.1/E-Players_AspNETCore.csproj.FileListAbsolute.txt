@@ -108,3 +108,4 @@ C:\Users\Paulo Brandão\Desktop\E-Players_AspNETCore\obj\Debug\netcoreapp3.1\E-P
 C:\Users\Paulo Brandão\Desktop\E-Players_AspNETCore\obj\Debug\netcoreapp3.1\E-Players_AspNETCore.pdb
 C:\Users\Paulo Brandão\Desktop\E-Players_AspNETCore\obj\Debug\netcoreapp3.1\E-Players_AspNETCore.genruntimeconfig.cache
 C:\Users\Paulo Brandão\Desktop\E-Players_AspNETCore\obj\Debug\netcoreapp3.1\E-Players_AspNETCore.csproj.CopyComplete
+C:\Users\Paulo Brandão\Desktop\E-Players_AspNETCore\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs

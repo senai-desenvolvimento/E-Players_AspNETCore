@@ -1,0 +1,24 @@
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="titulo_pagina">
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+<form method="POST" action='@Url.Action("Logar")' class="cadastro">
+
+    <div class="campo">
+        <label>Email</label>
+        <input type="text" name="Email" required />
+    </div>
+
+    <div class="campo">
+        <label>Senha</label>
+        <input type="password" name="Senha" required />
+    </div>
+
+    <div class="erro">@TempData.Peek("Mensagem")</div>
+
+    <button class="gradient btn" type="submit">Entrar</button>
+</form>
