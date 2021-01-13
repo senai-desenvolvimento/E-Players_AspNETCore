@@ -767,3 +767,437 @@ dotnet run
 
 </form>
 ```
+
+### Parte 7 - Login - Parte 1
+
+> Colocamos os atributos de email e senha em Jogador
+```c#
+namespace E_Players_AspNETCore.Models
+{
+    public class Jogador
+    {
+        public int IdJogador { get; set; }
+        public string Nome { get; set; }
+        public int IdEquipe { get; set; }
+        // Login
+        public string Email { get; set; }
+        public string Senha { get; set; }
+
+    }
+}
+```
+
+> Herdamos EplayersBase em jogador
+```c#
+    public class Jogador : EPlayersBase
+```
+
+> Criamos o método construtor para gerar o arquivo
+```c#
+    private const string PATH = "Database/Jogador.csv";
+
+    public Jogador()
+    {
+        CreateFolderAndFile(PATH);
+    }
+```
+
+
+> Criamos a interface para Jogador -> *IJogador*
+```c#
+using System.Collections.Generic;
+using E_Players_AspNETCore.Models;
+
+namespace E_Players_AspNETCore.Interfaces
+{
+    public interface IJogador
+    {
+        //Criar
+        void Create(Jogador j);
+        //Ler
+        List<Jogador> ReadAll();
+        //Alterar
+        void Update(Jogador j);
+        //Excluir
+        void Delete(int id);  
+    }
+}
+```
+
+> Implementamos a Interface
+```c#
+public class Jogador : EPlayersBase , IJogador
+```
+
+> Implementamos os métodos de CRUD no model
+```c#
+        /// <summary>
+        /// Adiciona uma Jogador ao CSV
+        /// </summary>
+        /// <param name="j">Jogador</param>
+        public void Create(Jogador j)
+        {
+            string[] linha = { PrepararLinha(j) };
+            File.AppendAllLines(PATH, linha);
+        }
+
+        /// <summary>
+        /// Prepara a linha para a estrutura do objeto Jogador
+        /// </summary>
+        /// <param name="e">Objeto "Jogador"</param>
+        /// <returns>Retorna a linha em formato de .csv</returns>
+        private string PrepararLinha(Jogador j)
+        {
+            return $"{j.IdJogador};{j.Nome};{j.Email};{j.Senha}";
+        }
+
+        /// <summary>
+        /// Exclui uma Jogador
+        /// </summary>
+        /// <param name="idJogador"></param>
+        public void Delete(int idJogador)
+        {
+            List<string> linhas = ReadAllLinesCSV(PATH);
+            // 1;FLA;fla.png
+            linhas.RemoveAll(x => x.Split(";")[0] == idJogador.ToString());                        
+            RewriteCSV(PATH, linhas);
+        }
+
+        /// <summary>
+        /// Lê todos as linhas do csv
+        /// </summary>
+        /// <returns>Lista de Jogadors</returns>
+        public List<Jogador> ReadAll()
+        {
+            List<Jogador> jogadores = new List<Jogador>();
+            string[] linhas = File.ReadAllLines(PATH);
+
+            foreach (var item in linhas)
+            {
+                string[] linha = item.Split(";");
+
+                Jogador jogador = new Jogador();
+                jogador.IdJogador = int.Parse(linha[0]);
+                jogador.Nome = linha[1];
+                jogador.Email = linha[2];
+                jogador.Senha = linha[3];
+
+                jogadores.Add(jogador);
+            }
+            return jogadores;
+        }
+
+        /// <summary>
+        /// Altera uma Jogador
+        /// </summary>
+        /// <param name="j">Jogador alterada</param>
+        public void Update(Jogador j)
+        {
+            List<string> linhas = ReadAllLinesCSV(PATH);
+            linhas.RemoveAll(x => x.Split(";")[0] == j.IdJogador.ToString());
+            linhas.Add( PrepararLinha(j) );                        
+            RewriteCSV(PATH, linhas); 
+        }
+```
+
+> Criamos o controller *JogadorController.cs*, com o método de retorno pra view da index:
+```c#
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+
+namespace E_Players_AspNETCore.Controllers
+{
+    [Route("Jogador")]
+    public class JogadorController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+    }
+}
+```
+
+> Instanciamos Jogador dentro da classe e chamamos uma ViewBag como apoio e retorno para listar os jogadores disponíveis:
+```c#
+        Jogador jogadorModel = new Jogador();
+
+        public IActionResult Index()
+        {
+            ViewBag.Jogadores = jogadorModel.ReadAll();
+            return View();
+        }
+```
+>Criamos o método Cadastrar(), passando como argumento um IFormCollection:
+```c#
+        public IActionResult Cadastrar(IFormCollection form)
+        {
+            Jogador novoJogador     = new Jogador();
+            novoJogador.IdJogador   = Int32.Parse(form["IdJogador"]);
+            novoJogador.Nome        = form["Nome"];
+            novoJogador.Email       = form["Email"];
+            novoJogador.Senha       = form["Senha"];
+
+            jogadorModel.Create(novoJogador);            
+            ViewBag.Jogadores = jogadorModel.ReadAll();
+
+            return LocalRedirect("~/Jogador");
+        }
+```
+
+> Dentro da pasta Views, criamos um diretório chamado Jogador, e dentro dele um arquivo chamado Index.cshtml
+Dentro deste arquivo chamamos nossa model e mudamos a ViewData do Title:
+```c#
+    @model Jogador
+    @{
+        ViewData["Title"] = "Jogadores";
+    }
+```
+
+> Logo em baixo criamos um form bem simples para testar, implementando a ação via Razor:
+```html
+@model Jogador
+@{
+    ViewData["Title"] = "Jogadores";
+}
+
+<div class="titulo_pagina">
+    <h1>cadastro de @ViewData["Title"]</h1>
+</div>
+
+<form method="POST" action='@Url.Action("Cadastrar")' class="cadastro">
+
+    <div class="campo">
+        <label>ID Jogador</label>
+        <input type="text" name="IdJogador" />
+    </div>
+
+    <div class="campo">
+        <label>ID Equipe</label>
+        <input type="text" name="IdEquipe" />
+    </div>
+
+    <div class="campo">
+        <label>Nome</label>
+        <input type="text" name="Nome" />
+    </div>
+
+    <div class="campo">
+        <label>Email</label>
+        <input type="text" name="Email" />
+    </div>
+
+    <div class="campo">
+        <label>Senha</label>
+        <input type="password" name="Senha" />
+    </div>
+
+    <button class="gradient btn" type="submit">Cadastrar</button>
+</form>
+
+<table class="table table-striped table-responsive">
+    <thead>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+    </thead>
+    <tbody>
+        @foreach(Jogador j in ViewBag.Jogadores){
+            <tr>
+                <td>@j.IdJogador</td>
+                <td>@j.Nome</td>
+                <td>@j.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>
+```
+
+> Dentro da pasta Views/Home/Indesx.cshtml, adicionamos um link para abrir nossa página:
+```html
+<a class="navbar-brand" asp-area="" asp-controller="Jogador" asp-action="Index">Jogadores</a>
+```
+
+### Parte 7 - Login - Parte 2
+
+> Na pasta ***Views*** criamos uma nova pasta chamada ***Login*** e dentro de login colocamos um arquivo *Index.cshtml*
+
+```html
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="titulo_pagina">
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+<form method="POST" action='@Url.Action("Logar")' class="cadastro">
+
+    <div class="campo">
+        <label>Email</label>
+        <input type="text" name="Email" required />
+    </div>
+
+    <div class="campo">
+        <label>Senha</label>
+        <input type="password" name="Senha" required />
+    </div>
+
+    <button class="gradient btn" type="submit">Entrar</button>
+</form>
+```
+
+> Também criamos dentro da pasta Controllers a classe ***LoginController.cs*** , fazemos ela herdar de *Controller*, deixamos a Route no topo da classe como Login, e chamamos um model de Jogador para acessar as propriedades *Email* e *Senha*
+
+```c#
+using E_Players_AspNETCore.Models;
+using Microsoft.AspNetCore.Mvc;
+
+namespace E_Players_AspNETCore.Controllers
+{
+    [Route("Login")]
+    public class LoginController : Controller
+    {
+        Jogador jogadorModel = new Jogador();
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+    }
+}
+```
+
+> Dentro do menu principal colocamos um link para a tela de login:
+```html
+<li><a asp-controller="Login" asp-action="Index" title="voltar para a página inicial">LOGIN</a></li>
+```
+
+> Criamos o método para Logar e testamos se está redirecionando para a Home ao enviar o formulário:
+```c#
+        [Route("Logar")]
+        public IActionResult Logar(IFormCollection form)
+        {
+            return LocalRedirect("~/");
+        }
+```
+
+> Criamos no CSS uma classe para os erros:
+```css
+.erro{
+    color: #fc1e8b;
+}
+```
+
+> Dentro da classe login, utilizamos o recurso TempData para armazenar as mensagens de erro na aplicação:
+```c#
+[TempData]
+public string Mensagem { get; set; }
+```
+
+> Criamos o método Logar utilizando todos os parâmetros necessários
+```c#
+public IActionResult Logar(IFormCollection form)
+{
+    // Lemos todos os arquivos do CSV
+    List<string> csv = jogadorModel.ReadAllLinesCSV("Database/Jogador.csv");
+
+    // Verificamos se as informações passadas existe na lista de string
+    var logado = 
+    csv.Find(
+        x => 
+        x.Split(";")[2] == form["Email"] && 
+        x.Split(";")[3] == form["Senha"]
+    );
+
+
+    // Redirecionamos o usuário logado caso encontrado
+    if(logado != null)
+    {
+        return LocalRedirect("~/");
+    }
+
+    Mensagem = "Dados incorretos, tente novamente...";
+    return LocalRedirect("~/Login");
+}
+```
+
+> Dentro da div de erro chamamos nossa TempData
+```html
+<div class="erro">@TempData.Peek("Mensagem")</div>
+```
+
+> Vamos salvar os dados na sessão do navegador utilizando a documentação da microsoft: [https://docs.microsoft.com/pt-br/aspnet/core/fundamentals/app-state?view=aspnetcore-5.0](https://docs.microsoft.com/pt-br/aspnet/core/fundamentals/app-state?view=aspnetcore-5.0)
+
+> Em Startup.cs, no método de serviços adicionamos:
+```c#
+    services.AddDistributedMemoryCache();
+
+    services.AddSession(options =>
+    {
+        options.IdleTimeout = TimeSpan.FromHours(2);
+        options.Cookie.HttpOnly = true;
+        options.Cookie.IsEssential = true;
+    });
+```
+
+> No método *Configure* adicione o seguinte método, em cima de *app.UseEndpoints*:
+```c#
+app.UseSession();
+```
+
+
+
+> Dentro de *logado* , antes de retornar o login com sucesso, salvamos os dados do usuário em uma Sessão:
+```c#
+if(logado != null)
+{
+    // Definimos os valores a serem salvos na sessão
+    HttpContext.Session.SetString("_UserName", logado.Split(";")[1]);
+
+    return LocalRedirect("~/");
+}
+```
+
+> Na Index da HomeController, colocamos uma ViewBag, pegando as informações da sessão:
+```c#
+ViewBag.UserName = HttpContext.Session.GetString("_UserName"); 
+```
+
+> No menu principal no **_Layout.cshtml**, incrementamos a seguinte condicional:
+```html
+@if(ViewBag.UserName != null)
+{
+    <li style="color: #d5379b">Olá @ViewBag.UserName!</li>
+    <li><a asp-controller="Login" asp-action="Logout" title="voltar para a página inicial">SAIR</a></li>
+}else{
+
+    <li><a asp-controller="Login" asp-action="Index" title="voltar para a página inicial">LOGIN</a></li>
+}
+```
+
+> Fazemos o método de Logout:
+```c#
+[Route("Logout")]
+public IActionResult Logout()
+{
+    HttpContext.Session.Remove("_UserName");
+    return LocalRedirect("~/");
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+

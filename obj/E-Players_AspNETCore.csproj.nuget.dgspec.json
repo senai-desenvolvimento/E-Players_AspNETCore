@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Paulo Brandão\\Documents\\SENAI\\2020_1Sem\\E-Players\\E-Players_AspNETCore\\E-Players_AspNETCore.csproj": {}
+    "C:\\Users\\Paulo Brandão\\Desktop\\E-Players_AspNETCore\\E-Players_AspNETCore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Paulo Brandão\\Documents\\SENAI\\2020_1Sem\\E-Players\\E-Players_AspNETCore\\E-Players_AspNETCore.csproj": {
+    "C:\\Users\\Paulo Brandão\\Desktop\\E-Players_AspNETCore\\E-Players_AspNETCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Paulo Brandão\\Documents\\SENAI\\2020_1Sem\\E-Players\\E-Players_AspNETCore\\E-Players_AspNETCore.csproj",
+        "projectUniqueName": "C:\\Users\\Paulo Brandão\\Desktop\\E-Players_AspNETCore\\E-Players_AspNETCore.csproj",
         "projectName": "E-Players_AspNETCore",
-        "projectPath": "C:\\Users\\Paulo Brandão\\Documents\\SENAI\\2020_1Sem\\E-Players\\E-Players_AspNETCore\\E-Players_AspNETCore.csproj",
+        "projectPath": "C:\\Users\\Paulo Brandão\\Desktop\\E-Players_AspNETCore\\E-Players_AspNETCore.csproj",
         "packagesPath": "C:\\Users\\Paulo Brandão\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Paulo Brandão\\Documents\\SENAI\\2020_1Sem\\E-Players\\E-Players_AspNETCore\\obj\\",
+        "outputPath": "C:\\Users\\Paulo Brandão\\Desktop\\E-Players_AspNETCore\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
