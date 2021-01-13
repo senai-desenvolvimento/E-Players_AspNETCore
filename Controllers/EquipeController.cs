@@ -27,12 +27,12 @@ namespace E_Players_AspNETCore.Controllers
             novaEquipe.IdEquipe = Int32.Parse( form["IdEquipe"] );
             novaEquipe.Nome = form["Nome"];
 
-            // Upload Início
-            var file    = form.Files[0];
-            var folder  = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Equipes");
-
-            if(file != null)
+            if(form.Files.Count > 0)
             {
+                // Upload Início
+                var file    = form.Files[0];
+                var folder  = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Equipes");
+
                 if(!Directory.Exists(folder)){
                     Directory.CreateDirectory(folder);
                 }
@@ -42,7 +42,7 @@ namespace E_Players_AspNETCore.Controllers
                 {  
                     file.CopyTo(stream);  
                 }
-                novaEquipe.Imagem   = file.FileName;
+                novaEquipe.Imagem   = file.FileName;                
             }
             else
             {
